@@ -82,6 +82,14 @@ header .navbar{
     align-items: center;
     justify-content: space-between;
 }
+/* header .nav-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+header .nav-logo .logo-img{
+    max-width: 100px;
+}
 .navbar .nav-logo .logo-text{
     color: var(--white-color);
     font-size: var(--font-size-x1);
@@ -104,11 +112,12 @@ header .navbar{
 
 .navbar .nav-menu .nav-link:hover{
     color: var(--black);
-    background: rgba(44, 221, 240, 0.727);
+    background: var(--blue-ncs);
 
 }
 
 .hero-section{
+    padding-left: 6%;
     min-height: 100vh;
     background:var(--black);
     
@@ -125,7 +134,7 @@ header .navbar{
 .hero-section .hero-details .title{
     font-size: var(--font-size-xx1);
     color: var(--blue-ncs);
-    font-family: "Miniver","sans-seriff";
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .hero-section .hero-details .subtitle{
     margin-top: 8px;
@@ -139,6 +148,12 @@ header .navbar{
     font-size: var(--font-size-m);
 
 }
+.hero-section .hero-details .buttons{
+    display: flex;
+    gap: 23px;
+
+}
+
 .hero-section .hero-details .button{
     padding:10px 26px ;
     border: 2px solid transparent;
@@ -149,4 +164,53 @@ header .navbar{
     transition: 0.3s ease;
 }
 
+.hero-section .hero-details .button:hover,
+.hero-section .hero-details .contact-us
+{
+    color: white;
+    border-color: white;
+    background: transparent;
+
+}
+.hero-section .hero-details .contact-us:hover{
+    color:  black;
+    border-color: var(--blue-ncs);
+    background: var(--blue-ncs);
+}
+
+.hero-section .hero-image-wrapper{
+    max-width: 600px;
+    margin-top: 63px;
+    margin-right: 60px;
+    
+
+}
+
+@media screen and (max-width: 900px) {
+    :root{
+        --font-size-m: 1rem;
+        --font-size-1: 1.3rem;
+        --font-size-x1: 1.5rem;
+        --font-size-xx1: 1.8rem;
+    }
+    .navbar .nav-menu{
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 300px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 100px;
+        background: white;
+    }
+    .navbar .nav-menu .nav-link{
+        color: var(--dark-color);
+        display: block;
+        margin-top: 17px;
+        font-size: var(--font-size-1);
+    }
+}
 
