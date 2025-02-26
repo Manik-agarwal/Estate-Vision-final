@@ -9,7 +9,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
   </head>
   <body>
     <header>
@@ -24,11 +25,11 @@
             <a href="#" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">House Price Predictor</a>
+            <a href="/templates/ai_prediction.html" class="nav-link">House Price Predictor</a>
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">Analytics Dashboards</a>
+            <a href="/templates/gallery.html" class="nav-link">Analytics Dashboards</a>
           </li>
 
           <li class="nav-item">
@@ -66,7 +67,7 @@
             </div>
           </div>
           <div class="hero-image-wrapper">
-            <img src="/pictures/image1.jpg" alt="hero" class="hero-image" />
+            <img src="/static/image1.jpg" alt="hero" class="hero-image" />
           </div>
         </div>
       </section>
@@ -75,7 +76,7 @@
       <section class="about-section" id="about">
         <div class="section-content">
           <div class="about-image-wrapper">
-            <img src="/pictures/image2.jpg" alt="about" class="about-image" />
+            <img src="/static/image2.jpg" alt="about" class="about-image" />
           </div>
           <div>
             <div class="about-details">
@@ -253,6 +254,6 @@
        
     </main>
 
-    <script src="script.js"></script>
+    <script src="/static/script.js"></script>
   </body>
 </html>
