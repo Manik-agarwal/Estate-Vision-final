@@ -43,8 +43,10 @@
 --border-radius-m: 30px;
 --border-radius-circle: 50%;
 I
---site-max-width: 1300px;
+--site-max-width:1300px;
 }
+
+
 
 html{
     scroll-behavior: smooth;
