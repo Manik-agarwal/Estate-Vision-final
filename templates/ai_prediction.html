@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
                         <h1> content</h1>
                     </div>
                     <div class="card-body">
-                        <form method="post" accept-charset="UTF-8">
+                        <form method="post" action="/some-url" accept-charset="UTF-8">
                             <div class="row">
                                 <div class="col-md-6 form group" style="text-align: center;">
                                     <label><b>Select the location:</b></label>
@@ -59,7 +59,206 @@
         
     </div>
     
+<script>
+    function form_handler(event){
+        event.preventDefault();
+    }
+    function send_data(){
+        document.querySelector('form').addEventListener("submit",form_handler);
 
+        var fd=new FormData(document.querySelector('form'));
+
+        var xhr=new XMLHttpRequest();
+
+        xhr.open('POST','/predict',true);
+        document.getElementById("prediction").innerHTML="Wait Predicting Price !-----";
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==XMLHttpRequest.DONE){
+                document.getElementById('prediction').innerHTML="Prediction : Rs "+xhr.responseText;
+            }
+        };
+        xhr.onload=function(){};
+        xhr.send(fd);
+    }
+</script>
 
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Vision</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        body {
+            background-color: #000000; /* Set background to black */
+            color: white; /* Set text color to white for contrast */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .card {
+            background-color: #333333;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #444444;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .form-control,
+        .selectpicker {
+            background-color: #555555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .form-control:focus,
+        .selectpicker:focus {
+            border-color: #007BFF;
+            background-color: #444444;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .col-md-6 {
+            text-align: center;
+        }
+
+        .prediction-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .prediction-container h3 {
+            font-size: 24px;
+            color: #28a745;
+        }
+        .footer-section{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    padding: 20px 0;
+    background: black;
+
+}  
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="bg-dark py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>House Price Predictor</h1>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="/some-url" accept-charset="UTF-8" id="predictForm">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label><b>Select the location:</b></label>
+                                        <select class="selectpicker form-control" id="location" name="location" required="1">
+                                            {% for location in locations %}
+                                            <option value="{{location}}">{{location}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label><b>Enter No of BHK:</b></label>
+                                        <input type="text" class="form-control" id="bhk" name="bhk" placeholder="Enter BHK" required>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label><b>Enter No of Bathrooms Wanted:</b></label>
+                                        <input type="text" class="form-control" id="bath" name="bath" placeholder="No of Bathrooms" required>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label><b>Enter Square Feet:</b></label>
+                                        <input type="text" class="form-control" id="total_sqft" name="total_sqft" placeholder="Enter Square feet" required>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <button type="submit" class="btn btn-primary w-100">Predict</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Prediction Result -->
+                    <div class="prediction-container">
+                        <h3><span id="prediction"></span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer-section">
+        <div class="section-content">
+            <p class="copyright-text">© 2025 Estate Vision</p>
+            <p class="policy-text">
+                <a href="#" class="policy-link">Privacy Policy</a>
+                <span class="separator">.</span>
+                <a href="#" class="policy-link">Payment Policy</a>
+                <span class="separator"></span>
+            </p>
+        </div>
+
+       </footer>
+
+    <script>
+        // Form submission handling and AJAX request
+        document.getElementById('predictForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('POST', '/predict', true);
+            document.getElementById("prediction").innerHTML = "Wait, predicting price...";
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    document.getElementById('prediction').innerHTML = "Prediction: Rs " + xhr.responseText;
+                }
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+
+</body>
+
 </html>
